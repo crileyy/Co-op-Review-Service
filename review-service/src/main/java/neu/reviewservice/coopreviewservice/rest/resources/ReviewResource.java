@@ -13,6 +13,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/review")
 public class ReviewResource {
 
+  /*
+  TODO APIs to make
+  Get:
+    Get all reviews for a company (can add parameters to get reviews for a specified company)
+    Get all ratings for a company
+    Get average rating for a company
+    Get location information for co-op position
+    Get user information
+    Get accepted rate
+    Get offer rate
+  Put:
+    Update user
+    Update review
+    Update company
+  Post:
+    Add review
+    Add user
+    Add company
+    Add major
+  Delete:
+    Delete user
+    Delete review
+   */
+
   @RequestMapping(path = "ping", method = RequestMethod.GET)
   public ResponseEntity<String> findAllSongs() {
     return new ResponseEntity<>("pong", HttpStatus.OK);
