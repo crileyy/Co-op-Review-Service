@@ -1,10 +1,14 @@
 package neu.reviewservice.coopreviewservice.rest.resources;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import neu.reviewservice.coopreviewservice.models.User;
+import neu.reviewservice.coopreviewservice.repositories.UserRepository;
 
 /**
  * REST APIs for the reviews.
@@ -12,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/review")
 public class ReviewResource {
+
+  @Autowired
+  private UserRepository userRepository;
 
   /*
   TODO APIs to make
@@ -36,6 +43,11 @@ public class ReviewResource {
     Delete user
     Delete review
    */
+
+  @RequestMapping(path = "allUsers", method = RequestMethod.GET)
+  public ResponseEntity<Iterable<User>> allUsers() {
+    return new ResponseEntity<>(this.userRepository.findAll(), HttpStatus.OK);
+  }
 
   @RequestMapping(path = "ping", method = RequestMethod.GET)
   public ResponseEntity<String> findAllSongs() {
