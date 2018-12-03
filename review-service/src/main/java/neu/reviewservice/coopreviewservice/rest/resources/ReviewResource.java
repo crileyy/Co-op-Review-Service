@@ -76,6 +76,11 @@ public class ReviewResource {
     Delete user
     Delete review
    */
+
+  // POST
+
+
+  // GET
   @RequestMapping(path = "avgRatingForCompany/{name}", method = RequestMethod.GET)
   public ResponseEntity<Double> avgRatingForCompany(@PathVariable String name) {
     return new ResponseEntity<>(this.reviewService.getAvgRatingForCompany(name), HttpStatus.OK);
@@ -89,6 +94,12 @@ public class ReviewResource {
   @RequestMapping(path = "reviewsForCompany/{name}", method = RequestMethod.GET)
   public ResponseEntity<List<Review>> reviewsForCompany(@PathVariable String name) {
     return new ResponseEntity<>(this.reviewService.getReviewsForCompany(name), HttpStatus.OK);
+  }
+
+  @RequestMapping(path = "user/{username}", method = RequestMethod.GET)
+  public ResponseEntity<User> userByName(@PathVariable String username) {
+    User user = this.userRepository.findByUsername(username);
+    return new ResponseEntity<>(user, HttpStatus.OK);
   }
 
   @RequestMapping(path = "allCompanies", method = RequestMethod.GET)

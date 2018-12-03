@@ -10,4 +10,5 @@ import neu.reviewservice.coopreviewservice.models.User;
  */
 public interface UserRepository extends CrudRepository<User, Integer> {
 
+  User findByUsername(String username);
 }
