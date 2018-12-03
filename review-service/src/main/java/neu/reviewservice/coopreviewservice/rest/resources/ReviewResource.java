@@ -7,8 +7,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import neu.reviewservice.coopreviewservice.models.Company;
+import neu.reviewservice.coopreviewservice.models.CompanyLocation;
+import neu.reviewservice.coopreviewservice.models.Location;
+import neu.reviewservice.coopreviewservice.models.Major;
 import neu.reviewservice.coopreviewservice.models.Review;
 import neu.reviewservice.coopreviewservice.models.User;
+import neu.reviewservice.coopreviewservice.repositories.CompanyLocationRepository;
+import neu.reviewservice.coopreviewservice.repositories.CompanyRepository;
+import neu.reviewservice.coopreviewservice.repositories.LocationRepository;
+import neu.reviewservice.coopreviewservice.repositories.MajorRepository;
 import neu.reviewservice.coopreviewservice.repositories.ReviewRepository;
 import neu.reviewservice.coopreviewservice.repositories.UserRepository;
 
@@ -24,6 +32,18 @@ public class ReviewResource {
 
   @Autowired
   private ReviewRepository reviewRepository;
+
+  @Autowired
+  private MajorRepository majorRepository;
+
+  @Autowired
+  private LocationRepository locationRepository;
+
+  @Autowired
+  private CompanyRepository companyRepository;
+
+  @Autowired
+  private CompanyLocationRepository companyLocationRepository;
 
   /*
   TODO APIs to make
@@ -48,6 +68,25 @@ public class ReviewResource {
     Delete user
     Delete review
    */
+  @RequestMapping(path = "allCompanies", method = RequestMethod.GET)
+  public ResponseEntity<Iterable<Company>> allCompanies() {
+    return new ResponseEntity<>(this.companyRepository.findAll(), HttpStatus.OK);
+  }
+
+  @RequestMapping(path = "allCompanyLocations", method = RequestMethod.GET)
+  public ResponseEntity<Iterable<CompanyLocation>> allCompanyLocations() {
+    return new ResponseEntity<>(this.companyLocationRepository.findAll(), HttpStatus.OK);
+  }
+
+  @RequestMapping(path = "allLocations", method = RequestMethod.GET)
+  public ResponseEntity<Iterable<Location>> allLocations() {
+    return new ResponseEntity<>(this.locationRepository.findAll(), HttpStatus.OK);
+  }
+
+  @RequestMapping(path = "allMajors", method = RequestMethod.GET)
+  public ResponseEntity<Iterable<Major>> allMajors() {
+    return new ResponseEntity<>(this.majorRepository.findAll(), HttpStatus.OK);
+  }
 
   @RequestMapping(path = "allReviews", method = RequestMethod.GET)
   public ResponseEntity<Iterable<Review>> allReviews() {
