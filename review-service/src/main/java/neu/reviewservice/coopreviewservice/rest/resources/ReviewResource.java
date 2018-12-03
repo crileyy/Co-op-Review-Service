@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import neu.reviewservice.coopreviewservice.models.Review;
 import neu.reviewservice.coopreviewservice.models.User;
+import neu.reviewservice.coopreviewservice.repositories.ReviewRepository;
 import neu.reviewservice.coopreviewservice.repositories.UserRepository;
 
 /**
@@ -19,6 +21,9 @@ public class ReviewResource {
 
   @Autowired
   private UserRepository userRepository;
+
+  @Autowired
+  private ReviewRepository reviewRepository;
 
   /*
   TODO APIs to make
@@ -43,6 +48,11 @@ public class ReviewResource {
     Delete user
     Delete review
    */
+
+  @RequestMapping(path = "allReviews", method = RequestMethod.GET)
+  public ResponseEntity<Iterable<Review>> allReviews() {
+    return new ResponseEntity<>(this.reviewRepository.findAll(), HttpStatus.OK);
+  }
 
   @RequestMapping(path = "allUsers", method = RequestMethod.GET)
   public ResponseEntity<Iterable<User>> allUsers() {
