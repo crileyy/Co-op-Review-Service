@@ -76,6 +76,11 @@ public class ReviewResource {
     Delete user
     Delete review
    */
+  @RequestMapping(path = "ratingsForCompany/{name}", method = RequestMethod.GET)
+  public ResponseEntity<List<Integer>> ratingsForCompany(@PathVariable String name) {
+    return new ResponseEntity<>(this.reviewService.getRatingsForCompany(name), HttpStatus.OK);
+  }
+
   @RequestMapping(path = "reviewsForCompany/{name}", method = RequestMethod.GET)
   public ResponseEntity<List<Review>> reviewsForCompany(@PathVariable String name) {
     return new ResponseEntity<>(this.reviewService.getReviewsForCompany(name), HttpStatus.OK);

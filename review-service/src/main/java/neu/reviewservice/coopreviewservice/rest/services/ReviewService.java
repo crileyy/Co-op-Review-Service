@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import neu.reviewservice.coopreviewservice.models.Review;
 import neu.reviewservice.coopreviewservice.repositories.CompanyLocationRepository;
@@ -40,5 +41,10 @@ public class ReviewService {
   public List<Review> getReviewsForCompany(String name) {
     Integer companyId = this.companyRepository.findByName(name).getCompanyId();
     return this.reviewRepository.findByCompanyId(companyId);
+  }
+
+  public List<Integer> getRatingsForCompany(String name) {
+    Integer companyId = this.companyRepository.findByName(name).getCompanyId();
+    return this.reviewRepository.findByCompanyId(companyId).stream().map(Review::getCompanyId).collect(Collectors.toList());
   }
 }
