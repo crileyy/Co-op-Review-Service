@@ -16,6 +16,7 @@ import neu.reviewservice.coopreviewservice.models.CompanyLocation;
 import neu.reviewservice.coopreviewservice.models.Location;
 import neu.reviewservice.coopreviewservice.models.Major;
 import neu.reviewservice.coopreviewservice.models.Review;
+import neu.reviewservice.coopreviewservice.models.ReviewDTO;
 import neu.reviewservice.coopreviewservice.models.User;
 import neu.reviewservice.coopreviewservice.repositories.CompanyLocationRepository;
 import neu.reviewservice.coopreviewservice.repositories.CompanyRepository;
@@ -78,7 +79,12 @@ public class ReviewResource {
    */
 
   // POST
-
+  @RequestMapping(method = RequestMethod.POST)
+  public ResponseEntity<Review> addSong(@RequestBody Review review) {
+    Review response = this.reviewRepository.save(review);
+    return new ResponseEntity<>(response,
+            response != null ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR);
+  }
 
   // GET
   @RequestMapping(path = "avgRatingForCompany/{name}", method = RequestMethod.GET)
@@ -94,12 +100,6 @@ public class ReviewResource {
   @RequestMapping(path = "reviewsForCompany/{name}", method = RequestMethod.GET)
   public ResponseEntity<List<Review>> reviewsForCompany(@PathVariable String name) {
     return new ResponseEntity<>(this.reviewService.getReviewsForCompany(name), HttpStatus.OK);
-  }
-
-  @RequestMapping(path = "user/{username}", method = RequestMethod.GET)
-  public ResponseEntity<User> userByName(@PathVariable String username) {
-    User user = this.userRepository.findByUsername(username);
-    return new ResponseEntity<>(user, HttpStatus.OK);
   }
 
   @RequestMapping(path = "allCompanies", method = RequestMethod.GET)
@@ -125,11 +125,6 @@ public class ReviewResource {
   @RequestMapping(path = "allReviews", method = RequestMethod.GET)
   public ResponseEntity<Iterable<Review>> allReviews() {
     return new ResponseEntity<>(this.reviewRepository.findAll(), HttpStatus.OK);
-  }
-
-  @RequestMapping(path = "allUsers", method = RequestMethod.GET)
-  public ResponseEntity<Iterable<User>> allUsers() {
-    return new ResponseEntity<>(this.userRepository.findAll(), HttpStatus.OK);
   }
 
   @RequestMapping(path = "ping", method = RequestMethod.GET)

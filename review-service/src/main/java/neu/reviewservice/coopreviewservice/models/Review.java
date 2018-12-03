@@ -26,6 +26,7 @@ import javax.persistence.Id;
 public class Review {
 
   @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer reviewId;
   private String reviewText;
   private Double rating;
