@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import neu.reviewservice.coopreviewservice.models.Review;
@@ -46,5 +47,12 @@ public class ReviewService {
   public List<Integer> getRatingsForCompany(String name) {
     Integer companyId = this.companyRepository.findByName(name).getCompanyId();
     return this.reviewRepository.findByCompanyId(companyId).stream().map(Review::getCompanyId).collect(Collectors.toList());
+  }
+
+  public Double getAvgRatingForCompany(String name) {
+    Integer companyId = this.companyRepository.findByName(name).getCompanyId();
+    List<Double> ratings = this.reviewRepository.findByCompanyId(companyId).stream().map(Review::getRating).collect(Collectors.toList());
+    Optional<Double> sumRatings = ratings.stream().reduce(Double::sum);
+    return sumRatings.map(sum -> sum / ratings.size()).orElse(-1.0);
   }
 }

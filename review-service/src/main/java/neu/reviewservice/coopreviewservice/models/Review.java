@@ -26,7 +26,7 @@ public class Review {
   @Id
   private Integer reviewId;
   private String reviewText;
-  private Integer rating;
+  private Double rating;
   private Boolean returnOffer;
   private Boolean wouldWorkAgain;
   private Integer userId;
@@ -51,11 +51,11 @@ public class Review {
     this.reviewText = reviewText;
   }
 
-  public Integer getRating() {
+  public Double getRating() {
     return rating;
   }
 
-  public void setRating(Integer rating) {
+  public void setRating(Double rating) {
     this.rating = rating;
   }
 

@@ -62,7 +62,7 @@ public class ReviewResource {
     Get location information for co-op position
     Get user information
     Get accepted rate
-    Get offer rate
+    Get return offer rate
   Put:
     Update user
     Update review
@@ -76,6 +76,11 @@ public class ReviewResource {
     Delete user
     Delete review
    */
+  @RequestMapping(path = "avgRatingForCompany/{name}", method = RequestMethod.GET)
+  public ResponseEntity<Double> avgRatingForCompany(@PathVariable String name) {
+    return new ResponseEntity<>(this.reviewService.getAvgRatingForCompany(name), HttpStatus.OK);
+  }
+
   @RequestMapping(path = "ratingsForCompany/{name}", method = RequestMethod.GET)
   public ResponseEntity<List<Integer>> ratingsForCompany(@PathVariable String name) {
     return new ResponseEntity<>(this.reviewService.getRatingsForCompany(name), HttpStatus.OK);
