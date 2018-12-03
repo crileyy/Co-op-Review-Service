@@ -3,9 +3,13 @@ package neu.reviewservice.coopreviewservice.rest.resources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 import neu.reviewservice.coopreviewservice.models.Company;
 import neu.reviewservice.coopreviewservice.models.CompanyLocation;
@@ -19,6 +23,7 @@ import neu.reviewservice.coopreviewservice.repositories.LocationRepository;
 import neu.reviewservice.coopreviewservice.repositories.MajorRepository;
 import neu.reviewservice.coopreviewservice.repositories.ReviewRepository;
 import neu.reviewservice.coopreviewservice.repositories.UserRepository;
+import neu.reviewservice.coopreviewservice.rest.services.ReviewService;
 
 /**
  * REST APIs for the reviews.
@@ -45,6 +50,9 @@ public class ReviewResource {
   @Autowired
   private CompanyLocationRepository companyLocationRepository;
 
+  @Autowired
+  private ReviewService reviewService;
+
   /*
   TODO APIs to make
   Get:
@@ -68,6 +76,11 @@ public class ReviewResource {
     Delete user
     Delete review
    */
+  @RequestMapping(path = "reviewsForCompany/{name}", method = RequestMethod.GET)
+  public ResponseEntity<List<Review>> reviewsForCompany(@PathVariable String name) {
+    return new ResponseEntity<>(this.reviewService.getReviewsForCompany(name), HttpStatus.OK);
+  }
+
   @RequestMapping(path = "allCompanies", method = RequestMethod.GET)
   public ResponseEntity<Iterable<Company>> allCompanies() {
     return new ResponseEntity<>(this.companyRepository.findAll(), HttpStatus.OK);

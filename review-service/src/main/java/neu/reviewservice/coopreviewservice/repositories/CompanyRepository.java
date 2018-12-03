@@ -9,4 +9,5 @@ import neu.reviewservice.coopreviewservice.models.Company;
  */
 public interface CompanyRepository extends CrudRepository<Company, Integer> {
 
+  Company findByName(String name);
 }
