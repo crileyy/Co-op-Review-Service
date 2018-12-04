@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
+ * ORM model. Class represents the company table and its fields represent the table's columns.
+ *
  * CREATE TABLE IF NOT EXISTS `company` (
  `company_id` INT NOT NULL,
  `name` VARCHAR(50) NOT NULL,

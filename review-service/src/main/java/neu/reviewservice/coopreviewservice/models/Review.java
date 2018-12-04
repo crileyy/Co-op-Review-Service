@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
+ * ORM model. Class represents the review table and its fields represent the table's columns.
+ *
  * CREATE TABLE IF NOT EXISTS `review` (
  `review_id` INT PRIMARY KEY AUTO_INCREMENT,
  `review_text` VARCHAR(2000) NULL,

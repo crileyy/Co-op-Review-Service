@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
+ * ORM model. Class represents the location table and its fields represent the table's columns.
+ *
  * CREATE TABLE IF NOT EXISTS `location` (
  `location_id` INT NOT NULL,
  `city` VARCHAR(50) NOT NULL,

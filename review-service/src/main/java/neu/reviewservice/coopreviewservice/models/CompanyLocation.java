@@ -6,6 +6,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 /**
+ * ORM model. Class represents the company_location table and its fields represent the table's columns.
+ *
  * CREATE TABLE IF NOT EXISTS `company_location` (
  `company_id` INT NOT NULL,
  `location_id` INT NOT NULL,

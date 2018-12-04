@@ -1,7 +1,7 @@
 package neu.reviewservice.coopreviewservice.models;
 
 /**
- * Created by criley on 12/2/18.
+ * ORM model. Class represents the user table and its fields represent the table's columns.
  *
  * CREATE TABLE IF NOT EXISTS `user` (
  `user_id` INT NOT NULL,
