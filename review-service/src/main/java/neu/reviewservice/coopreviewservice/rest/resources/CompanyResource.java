@@ -57,6 +57,7 @@ public class CompanyResource {
             response != null ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
+  // GET
   @RequestMapping(path = "allCompanies", method = RequestMethod.GET)
   public ResponseEntity<Iterable<Company>> allCompanies() {
     return new ResponseEntity<>(this.companyRepository.findAll(), HttpStatus.OK);

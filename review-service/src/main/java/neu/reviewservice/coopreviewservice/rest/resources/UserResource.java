@@ -65,7 +65,7 @@ public class UserResource {
 
   // GET
   @RequestMapping(path = "/{username}", method = RequestMethod.GET)
-  public ResponseEntity<User> userByName(@PathVariable String username) {
+  public ResponseEntity<User> userByUsername(@PathVariable String username) {
     User user = this.userRepository.findByUsername(username);
     return new ResponseEntity<>(user, HttpStatus.OK);
   }

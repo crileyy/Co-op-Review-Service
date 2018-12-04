@@ -13,13 +13,9 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import neu.reviewservice.coopreviewservice.models.Company;
-import neu.reviewservice.coopreviewservice.models.CompanyLocation;
 import neu.reviewservice.coopreviewservice.models.Location;
 import neu.reviewservice.coopreviewservice.models.Major;
 import neu.reviewservice.coopreviewservice.models.Review;
-import neu.reviewservice.coopreviewservice.models.ReviewDTO;
-import neu.reviewservice.coopreviewservice.models.User;
 import neu.reviewservice.coopreviewservice.repositories.CompanyLocationRepository;
 import neu.reviewservice.coopreviewservice.repositories.CompanyRepository;
 import neu.reviewservice.coopreviewservice.repositories.LocationRepository;
