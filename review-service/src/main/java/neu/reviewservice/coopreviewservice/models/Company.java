@@ -1,6 +1,10 @@
 package neu.reviewservice.coopreviewservice.models;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -13,6 +17,8 @@ import javax.persistence.Id;
 public class Company {
 
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Nullable
   private Integer companyId;
   private String name;
 

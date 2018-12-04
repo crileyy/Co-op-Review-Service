@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
-import neu.reviewservice.coopreviewservice.models.Review;
+import neu.reviewservice.coopreviewservice.models.Company;
+import neu.reviewservice.coopreviewservice.models.CompanyLocation;
 import neu.reviewservice.coopreviewservice.models.User;
 import neu.reviewservice.coopreviewservice.repositories.CompanyLocationRepository;
 import neu.reviewservice.coopreviewservice.repositories.CompanyRepository;
@@ -22,11 +23,11 @@ import neu.reviewservice.coopreviewservice.repositories.UserRepository;
 import neu.reviewservice.coopreviewservice.rest.services.ReviewService;
 
 /**
- * REST APIs for the users.
+ * REST APIs for the companies.
  */
 @RestController
-@RequestMapping("/user")
-public class UserResource {
+@RequestMapping("/company")
+public class CompanyResource {
   @Autowired
   private UserRepository userRepository;
 
@@ -50,21 +51,20 @@ public class UserResource {
 
   // POST
   @RequestMapping(method = RequestMethod.POST)
-  public ResponseEntity<User> addUser(@RequestBody @Valid User user) {
-    User response = this.userRepository.save(user);
+  public ResponseEntity<Company> addCompany(@RequestBody @Valid Company company) {
+    Company response = this.companyRepository.save(company);
     return new ResponseEntity<>(response,
             response != null ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
-  @RequestMapping(path = "/{username}", method = RequestMethod.GET)
-  public ResponseEntity<User> userByName(@PathVariable String username) {
-    User user = this.userRepository.findByUsername(username);
-    return new ResponseEntity<>(user, HttpStatus.OK);
+  @RequestMapping(path = "allCompanies", method = RequestMethod.GET)
+  public ResponseEntity<Iterable<Company>> allCompanies() {
+    return new ResponseEntity<>(this.companyRepository.findAll(), HttpStatus.OK);
   }
 
-  @RequestMapping(path = "allUsers", method = RequestMethod.GET)
-  public ResponseEntity<Iterable<User>> allUsers() {
-    return new ResponseEntity<>(this.userRepository.findAll(), HttpStatus.OK);
+  @RequestMapping(path = "allCompanyLocations", method = RequestMethod.GET)
+  public ResponseEntity<Iterable<CompanyLocation>> allCompanyLocations() {
+    return new ResponseEntity<>(this.companyLocationRepository.findAll(), HttpStatus.OK);
   }
 
 }

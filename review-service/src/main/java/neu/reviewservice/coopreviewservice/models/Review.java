@@ -1,5 +1,7 @@
 package neu.reviewservice.coopreviewservice.models;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +28,8 @@ import javax.persistence.Id;
 public class Review {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Nullable
   private Integer reviewId;
   private String reviewText;
   private Double rating;

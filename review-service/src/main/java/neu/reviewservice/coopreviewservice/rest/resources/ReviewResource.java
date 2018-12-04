@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import neu.reviewservice.coopreviewservice.models.Company;
 import neu.reviewservice.coopreviewservice.models.CompanyLocation;
 import neu.reviewservice.coopreviewservice.models.Location;
@@ -80,7 +82,7 @@ public class ReviewResource {
 
   // POST
   @RequestMapping(method = RequestMethod.POST)
-  public ResponseEntity<Review> addSong(@RequestBody Review review) {
+  public ResponseEntity<Review> addReview(@RequestBody @Valid Review review) {
     Review response = this.reviewRepository.save(review);
     return new ResponseEntity<>(response,
             response != null ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR);
@@ -100,16 +102,6 @@ public class ReviewResource {
   @RequestMapping(path = "reviewsForCompany/{name}", method = RequestMethod.GET)
   public ResponseEntity<List<Review>> reviewsForCompany(@PathVariable String name) {
     return new ResponseEntity<>(this.reviewService.getReviewsForCompany(name), HttpStatus.OK);
-  }
-
-  @RequestMapping(path = "allCompanies", method = RequestMethod.GET)
-  public ResponseEntity<Iterable<Company>> allCompanies() {
-    return new ResponseEntity<>(this.companyRepository.findAll(), HttpStatus.OK);
-  }
-
-  @RequestMapping(path = "allCompanyLocations", method = RequestMethod.GET)
-  public ResponseEntity<Iterable<CompanyLocation>> allCompanyLocations() {
-    return new ResponseEntity<>(this.companyLocationRepository.findAll(), HttpStatus.OK);
   }
 
   @RequestMapping(path = "allLocations", method = RequestMethod.GET)

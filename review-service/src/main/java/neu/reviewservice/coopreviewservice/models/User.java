@@ -17,6 +17,8 @@ package neu.reviewservice.coopreviewservice.models;
  CONSTRAINT `u_major_id` FOREIGN KEY (major_id) REFERENCES major (major_id));
  */
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +28,8 @@ import javax.persistence.Id;
 public class User {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Nullable
   private Integer userId;
   private String username;
   private String firstname;
