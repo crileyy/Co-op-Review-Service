@@ -48,6 +48,13 @@ public class UserResource {
   @Autowired
   private ReviewService reviewService;
 
+  // DELETE
+  @RequestMapping(method = RequestMethod.DELETE)
+  public ResponseEntity<String> deleteUser(@RequestBody @Valid User user) {
+    this.userRepository.delete(user);
+    return new ResponseEntity<>("User deleted", HttpStatus.OK);
+  }
+
   // POST
   @RequestMapping(method = RequestMethod.POST)
   public ResponseEntity<User> addUser(@RequestBody @Valid User user) {
@@ -56,6 +63,7 @@ public class UserResource {
             response != null ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
+  // GET
   @RequestMapping(path = "/{username}", method = RequestMethod.GET)
   public ResponseEntity<User> userByName(@PathVariable String username) {
     User user = this.userRepository.findByUsername(username);

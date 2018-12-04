@@ -80,6 +80,13 @@ public class ReviewResource {
     Delete review
    */
 
+  // DELETE
+  @RequestMapping(method = RequestMethod.DELETE)
+  public ResponseEntity<String> deleteReview(@RequestBody @Valid Review review) {
+    this.reviewRepository.delete(review);
+    return new ResponseEntity<>("Review deleted", HttpStatus.OK);
+  }
+
   // POST
   @RequestMapping(method = RequestMethod.POST)
   public ResponseEntity<Review> addReview(@RequestBody @Valid Review review) {
