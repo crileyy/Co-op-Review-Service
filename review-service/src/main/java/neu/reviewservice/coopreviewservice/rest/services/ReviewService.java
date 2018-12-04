@@ -16,7 +16,8 @@ import neu.reviewservice.coopreviewservice.repositories.ReviewRepository;
 import neu.reviewservice.coopreviewservice.repositories.UserRepository;
 
 /**
- * Created by criley on 12/3/18.
+ * The class handles business logic for the review APIs. It has methods for retrieving data from the
+ * database and processing it to return new data to the APIs.
  */
 @Service
 public class ReviewService {
@@ -39,16 +40,34 @@ public class ReviewService {
   @Autowired
   private CompanyLocationRepository companyLocationRepository;
 
+  /**
+   * Retrieves all of the reviews for the company with the given name.
+   *
+   * @param name the name of the company
+   * @return     a list of the reviews for that company
+   */
   public List<Review> getReviewsForCompany(String name) {
     Integer companyId = this.companyRepository.findByName(name).getCompanyId();
     return this.reviewRepository.findByCompanyId(companyId);
   }
 
+  /**
+   * Retrieves all of the ratings for the company with the given name.
+   *
+   * @param name the name of the company
+   * @return     a list of the ratings for the company
+   */
   public List<Integer> getRatingsForCompany(String name) {
     Integer companyId = this.companyRepository.findByName(name).getCompanyId();
     return this.reviewRepository.findByCompanyId(companyId).stream().map(Review::getCompanyId).collect(Collectors.toList());
   }
 
+  /**
+   * Retrieves the average rating for the company with the given name.
+   *
+   * @param name the name of the company
+   * @return     the average rating for the company
+   */
   public Double getAvgRatingForCompany(String name) {
     Integer companyId = this.companyRepository.findByName(name).getCompanyId();
     List<Double> ratings = this.reviewRepository.findByCompanyId(companyId).stream().map(Review::getRating).collect(Collectors.toList());

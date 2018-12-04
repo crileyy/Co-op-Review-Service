@@ -23,7 +23,7 @@ import neu.reviewservice.coopreviewservice.repositories.UserRepository;
 import neu.reviewservice.coopreviewservice.rest.services.ReviewService;
 
 /**
- * REST APIs for the companies.
+ * REST APIs for companies.
  */
 @RestController
 @RequestMapping("/company")

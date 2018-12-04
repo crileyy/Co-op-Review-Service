@@ -22,7 +22,7 @@ import neu.reviewservice.coopreviewservice.repositories.UserRepository;
 import neu.reviewservice.coopreviewservice.rest.services.ReviewService;
 
 /**
- * REST APIs for the users.
+ * REST APIs for users.
  */
 @RestController
 @RequestMapping("/user")
