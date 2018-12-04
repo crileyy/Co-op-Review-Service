@@ -52,31 +52,14 @@ public class ReviewResource {
   @Autowired
   private ReviewService reviewService;
 
-  /*
-  TODO APIs to make
-  Get:
-    Get all reviews for a company (can add parameters to get reviews for a specified company)
-    Get all ratings for a company
-    Get average rating for a company
-    Get location information for co-op position
-    Get user information
-    Get accepted rate
-    Get return offer rate
-  Put:
-    Update user
-    Update review
-    Update company
-  Post:
-    Add review
-    Add user
-    Add company
-    Add major
-  Delete:
-    Delete user
-    Delete review
-   */
-
   // DELETE
+
+  /**
+   * Delete a review.
+   *
+   * @param review the review to delete
+   * @return       A string if the deletion was successful
+   */
   @RequestMapping(method = RequestMethod.DELETE)
   public ResponseEntity<String> deleteReview(@RequestBody @Valid Review review) {
     this.reviewRepository.delete(review);
@@ -84,6 +67,13 @@ public class ReviewResource {
   }
 
   // POST
+
+  /**
+   * Add a review.
+   *
+   * @param review the review to add
+   * @return       the review that was added
+   */
   @RequestMapping(method = RequestMethod.POST)
   public ResponseEntity<Review> addReview(@RequestBody @Valid Review review) {
     Review response = this.reviewRepository.save(review);
@@ -92,36 +82,75 @@ public class ReviewResource {
   }
 
   // GET
+
+  /**
+   * Get the average rating for a company with the given name.
+   *
+   * @param name the name of the company
+   * @return     the average rating of the company with the given name
+   */
   @RequestMapping(path = "avgRatingForCompany/{name}", method = RequestMethod.GET)
   public ResponseEntity<Double> avgRatingForCompany(@PathVariable String name) {
     return new ResponseEntity<>(this.reviewService.getAvgRatingForCompany(name), HttpStatus.OK);
   }
 
+  /**
+   * Get all the ratings for a company with the given name.
+   *
+   * @param name the name of the company
+   * @return     a list of all the ratings for the company with the given name
+   */
   @RequestMapping(path = "ratingsForCompany/{name}", method = RequestMethod.GET)
   public ResponseEntity<List<Integer>> ratingsForCompany(@PathVariable String name) {
     return new ResponseEntity<>(this.reviewService.getRatingsForCompany(name), HttpStatus.OK);
   }
 
+  /**
+   * Get all the reviews for a company with the given name.
+   *
+   * @param name the name of the company
+   * @return     a list of all the reviews for the company with the given name
+   */
   @RequestMapping(path = "reviewsForCompany/{name}", method = RequestMethod.GET)
   public ResponseEntity<List<Review>> reviewsForCompany(@PathVariable String name) {
     return new ResponseEntity<>(this.reviewService.getReviewsForCompany(name), HttpStatus.OK);
   }
 
+  /**
+   * Get all locations in the database.
+   *
+   * @return an iterable of all the locations
+   */
   @RequestMapping(path = "allLocations", method = RequestMethod.GET)
   public ResponseEntity<Iterable<Location>> allLocations() {
     return new ResponseEntity<>(this.locationRepository.findAll(), HttpStatus.OK);
   }
 
+  /**
+   * Get all majors in the database.
+   *
+   * @return an iterable of all the majors
+   */
   @RequestMapping(path = "allMajors", method = RequestMethod.GET)
   public ResponseEntity<Iterable<Major>> allMajors() {
     return new ResponseEntity<>(this.majorRepository.findAll(), HttpStatus.OK);
   }
 
+  /**
+   * Get all the reviews in the database.
+   *
+   * @return an iterable of all the reviews
+   */
   @RequestMapping(path = "allReviews", method = RequestMethod.GET)
   public ResponseEntity<Iterable<Review>> allReviews() {
     return new ResponseEntity<>(this.reviewRepository.findAll(), HttpStatus.OK);
   }
 
+  /**
+   * API to test if the server is up and running.
+   *
+   * @return the string pong if the server is up
+   */
   @RequestMapping(path = "ping", method = RequestMethod.GET)
   public ResponseEntity<String> findAllSongs() {
     return new ResponseEntity<>("pong", HttpStatus.OK);

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
-import neu.reviewservice.coopreviewservice.models.Review;
 import neu.reviewservice.coopreviewservice.models.User;
 import neu.reviewservice.coopreviewservice.repositories.CompanyLocationRepository;
 import neu.reviewservice.coopreviewservice.repositories.CompanyRepository;
@@ -49,13 +48,39 @@ public class UserResource {
   private ReviewService reviewService;
 
   // DELETE
+
+  /**
+   * Delete a user.
+   *
+   * @param user the user to delete
+   * @return     a string if the deletion is successful
+   */
   @RequestMapping(method = RequestMethod.DELETE)
   public ResponseEntity<String> deleteUser(@RequestBody @Valid User user) {
     this.userRepository.delete(user);
     return new ResponseEntity<>("User deleted", HttpStatus.OK);
   }
 
+  /**
+   * Delete a user with the given username.
+   *
+   * @param username the username of the user to delete
+   * @return     a string if the deletion is successful
+   */
+  @RequestMapping(path = "/{username}", method = RequestMethod.DELETE)
+  public ResponseEntity<String> deleteUserByUsername(@PathVariable String username) {
+    this.userRepository.deleteUserByUsername(username);
+    return new ResponseEntity<>("User deleted", HttpStatus.OK);
+  }
+
   // POST
+
+  /**
+   * Add a user
+   *
+   * @param user the new user to add to the database
+   * @return     the user that was added to the database
+   */
   @RequestMapping(method = RequestMethod.POST)
   public ResponseEntity<User> addUser(@RequestBody @Valid User user) {
     User response = this.userRepository.save(user);
@@ -64,12 +89,24 @@ public class UserResource {
   }
 
   // GET
+
+  /**
+   * Get a user from their username
+   *
+   * @param username the username
+   * @return         the user with the given username
+   */
   @RequestMapping(path = "/{username}", method = RequestMethod.GET)
   public ResponseEntity<User> userByUsername(@PathVariable String username) {
     User user = this.userRepository.findByUsername(username);
     return new ResponseEntity<>(user, HttpStatus.OK);
   }
 
+  /**
+   * Get all users.
+   *
+   * @return an iterable of all the users in the database
+   */
   @RequestMapping(path = "allUsers", method = RequestMethod.GET)
   public ResponseEntity<Iterable<User>> allUsers() {
     return new ResponseEntity<>(this.userRepository.findAll(), HttpStatus.OK);

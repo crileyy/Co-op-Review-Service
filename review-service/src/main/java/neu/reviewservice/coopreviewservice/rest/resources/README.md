@@ -41,6 +41,8 @@ DELETE:
 
 Delete user - /user
 
+Delete a user with the given username - /user/{username}
+
 POST:
 
 Add user - /user

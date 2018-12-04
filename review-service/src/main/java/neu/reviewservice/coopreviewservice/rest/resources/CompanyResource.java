@@ -50,6 +50,13 @@ public class CompanyResource {
   private ReviewService reviewService;
 
   // POST
+
+  /**
+   * Add a company to the database.
+   *
+   * @param company the company to add
+   * @return        the company that was added
+   */
   @RequestMapping(method = RequestMethod.POST)
   public ResponseEntity<Company> addCompany(@RequestBody @Valid Company company) {
     Company response = this.companyRepository.save(company);
@@ -58,11 +65,22 @@ public class CompanyResource {
   }
 
   // GET
+
+  /**
+   * Get all companies in the database.
+   *
+   * @return an iterable of all companies
+   */
   @RequestMapping(path = "allCompanies", method = RequestMethod.GET)
   public ResponseEntity<Iterable<Company>> allCompanies() {
     return new ResponseEntity<>(this.companyRepository.findAll(), HttpStatus.OK);
   }
 
+  /**
+   * Get all company locations in the database.
+   *
+   * @return an iterable of all company locations
+   */
   @RequestMapping(path = "allCompanyLocations", method = RequestMethod.GET)
   public ResponseEntity<Iterable<CompanyLocation>> allCompanyLocations() {
     return new ResponseEntity<>(this.companyLocationRepository.findAll(), HttpStatus.OK);
